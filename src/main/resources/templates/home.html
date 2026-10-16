@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>REENILMO <span sec:authentication = "name"></span>!</h1>
+    <table>
+        <tr>
+            <th>Tapahtuma</th>
+            <th>Kuvaus</th>
+            <th>PVM</th>
+        </tr>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.desc}"></td>
+            <td th:text="${event.date}"></td>
+             <td><a th:href="@{/editevent/{id}(id=${event.id})}">Muokkaa</a></td>
+            <td><a th:href="@{/delete-event/{id}(id=${event.id})}">Poista</a></td>
+        </tr>
+    </table>
+    <a href="/newevent">Lisää uusi tapahtuma</a>
+</body>
+
+</html>
