@@ -2,14 +2,13 @@ package fi.ainojoro.harjoitustyo.domain;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Role {
@@ -17,10 +16,11 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Rooliilla on oltava nimi")
+    @Size(min = 3, max = 30, message = "Pituus oltava 3-30 merkkiä")
     private String name;
 
-    @JsonIgnoreProperties("role")
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @OneToMany(mappedBy = "role")
     private List<User> users;
 
     public Role() {

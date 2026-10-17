@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <header>
+        REENILMO
+        <a href="/users">Käyttäjät</a>
+        <a href="/home">Tapahtumat</a>
+    </header>
+            <h1 th:text="${event.title}"></h1>
+            <p>
+                <strong>Päivämäärä:</strong>
+                <span th:text="${event.date}"></span>
+            </p>
+            <p>
+                <strong>Kuvaus:</strong>
+                <span th:text="${event.desc}"></span>
+            </p>
+            <p>
+                <strong>Osallistujat:</strong>
+                <table>
+                    <tr th:each="participant : ${event.participants}">
+                        <td th:text="${#strings.capitalize(participant.participant.role.name)}"></td>
+                        <td th:text="${participant.participant.name}"></td>
+                        <td th:text="${participant.status}"></td>
+                        <td sec:authorize="hasAuthority('valmentaja')" th:text="${#temporals.format(participant.updatedAt, 'dd.MM.yyyy HH:mm')}"></td>
+                    </tr>
+                </table>
+                
+            </p>
+        </body>
+
+
+</html>

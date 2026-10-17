@@ -7,22 +7,41 @@
 </head>
 
 <body>
-    <h1>REENILMO <span sec:authentication = "name"></span>!</h1>
-    <table>
+    <header>
+        REENILMO
+        <a href="/users">Käyttäjät</a>
+        <a href="/home">Tapahtumat</a>
+    </header>
+    <h1>Moikka <span sec:authentication="name"></span>!</h1>
+    <table class="table table-striped">
         <tr>
             <th>Tapahtuma</th>
             <th>Kuvaus</th>
             <th>PVM</th>
+            <th>Ilmoittaudu</th>
+            <th sec:authorize="hasAuthority('valmentaja')">Toiminnot</th>
         </tr>
         <tr th:each="event : ${events}">
-            <td th:text="${event.title}"></td>
+            <td> <a th:href="@{/event/{id}(id=${event.id})}" th:text="${event.title}"></a></td>
             <td th:text="${event.desc}"></td>
             <td th:text="${event.date}"></td>
-             <td><a th:href="@{/editevent/{id}(id=${event.id})}">Muokkaa</a></td>
-            <td><a th:href="@{/delete-event/{id}(id=${event.id})}">Poista</a></td>
+            <td>
+                <form th:action="@{/event/{id}/in(id=${event.id})}" method="post"><button type="submit">IN</button></form>
+                <form th:action="@{/event/{id}/out(id=${event.id})}" method="post"><button type="submit">OUT</button></form>
+            </td>
+            <td sec:authorize="hasAuthority('valmentaja')">
+                <a th:href="@{/editevent/{id}(id=${event.id})}">Muokkaa</a>
+                <a th:href="@{/delete-event/{id}(id=${event.id})}">Poista</a>
+            </td>
+            
         </tr>
     </table>
-    <a href="/newevent">Lisää uusi tapahtuma</a>
+    <a sec:authorize="hasAuthority('valmentaja')" href="/newevent">Lisää uusi tapahtuma</a>
+    <footer>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </footer>
 </body>
 
 </html>

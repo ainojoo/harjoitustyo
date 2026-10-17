@@ -7,7 +7,11 @@
 </head>
 
 <body>
-    <h1>REENILMO</h1>
+    <header>
+        REENILMO
+        <a href="/users">Käyttäjät</a>
+        <a href="/home">Tapahtumat</a>
+    </header>
     <h2>Muokkaa haluttuja tietoja</h2>
     <form th:object="${oldUser}" th:action="@{/users/save}" action="#" method="post">
         <input type="hidden" th:field="*{id}" />
@@ -21,15 +25,20 @@
         <input type="text"id="phone" th:field="*{phone}"/>
         <p></p>
         <label for="bday">Syntymäaika:</label>
-        <input type="text"id="bday" th:field="*{bday}"/>
+        <input type="date"id="bday" th:field="*{bday}"/>
         <p></p>
         <label for="role">Rooli</label>
         <select th:field="*{role}">
             <option th:each="role:${roles}" th:value="${role.id}" th:text="${role.name}"></option>
         </select>
         <p></p>
-        <input type="submit" value="Tallenna"></input>
+        <button type="submit">Tallenna</button>
     </form>
+    <footer>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </footer>
 </body>
 
 </html>

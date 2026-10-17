@@ -7,7 +7,11 @@
 </head>
 
 <body>
-    <h1>REENILMO</h1>
+    <header>
+        REENILMO
+        <a href="/users">Käyttäjät</a>
+        <a href="/home">Tapahtumat</a>
+    </header>
     <h2>Lisää uusi tapahtuma</h2>
     <form th:object="${event}" th:action="@{/save-event}" action="#" method="post">
         <label for="title">Nimi:</label>
@@ -17,10 +21,15 @@
         <input type="text"id="desc" th:field="*{desc}"/>
         <p></p>
         <label for="date">Päivämäärä:</label>
-        <input type="text"id="date" th:field="*{date}"/>
+        <input type="date"id="date" th:field="*{date}"/>
         <p></p>
-        <input type="submit" value="Lisää tapahtuma"></input>
+        <button type="submit">Lisää tapahtuma</button>
     </form>
+    <footer>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </footer>
 </body>
 
 </html>

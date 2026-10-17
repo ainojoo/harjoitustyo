@@ -7,9 +7,16 @@
 </head>
 
 <body>
-    <h1>REENILMO</h1>
+    <header>
+        REENILMO
+        <a href="/users">Käyttäjät</a>
+        <a href="/home">Tapahtumat</a>
+    </header>
     <h2>Lisää uuden käyttäjän tiedot</h2>
     <form th:object="${newUser}" th:action="@{/users/save}" action="#" method="post">
+        <label for="username">Käyttäjäimi:</label>
+        <input type="text" id="username" th:field="*{username}"/>
+        <p></p>
         <label for="name">Nimi:</label>
         <input type="text" id="name" th:field="*{name}"/>
         <p></p>
@@ -20,15 +27,20 @@
         <input type="text"id="phone" th:field="*{phone}"/>
         <p></p>
         <label for="bday">Syntymäaika:</label>
-        <input type="text"id="bday" th:field="*{bday}"/>
+        <input type="date"id="bday" th:field="*{bday}"/>
         <p></p>
         <label for="role">Rooli</label>
         <select th:field="*{role}">
             <option th:each="role:${roles}" th:value="${role.id}" th:text="${role.name}"></option>
         </select>
         <p></p>
-        <input type="submit" value="Lisää käyttäjä"></input>
+        <button type="submit">Lisää käyttäjä</button>
     </form>
+    <footer>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </footer>
 </body>
 
 </html>

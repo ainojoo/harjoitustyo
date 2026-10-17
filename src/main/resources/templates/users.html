@@ -7,7 +7,12 @@
 </head>
 
 <body>
-    <h1>Hello <span sec:authentication = "name"></span>!</h1>
+    <header>
+        REENILMO
+        <a href="/users">Käyttäjät</a>
+        <a href="/home">Tapahtumat</a>
+    </header>
+    <h1>Moikka <span sec:authentication = "name"></span>!</h1>
     <table>
         <tr>
             <th>Nimi</th>
@@ -15,6 +20,7 @@
             <th>Puhelin</th>
             <th>Syntymäaika</th>
             <th>Rooli</th>
+            <th sec:authorize="hasAuthority('valmentaja')">Toiminnot</th>
         </tr>
         <tr th:each="user : ${users}">
             <td th:text="${user.name}"></td>
@@ -22,11 +28,19 @@
             <td th:text="${user.phone}"></td>
             <td th:text="${user.bday}"></td>
             <td th:text="${user.role.name}"></td>
-            <td><a th:href="@{/users/edit/{id}(id=${user.id})}">Muokkaa</a></td>
-            <td><a th:href="@{/users/delete/{id}(id=${user.id})}">Poista</a></td>
+            <td sec:authorize="hasAuthority('valmentaja')">
+                <a th:href="@{/users/edit/{id}(id=${user.id})}">Muokkaa</a>
+                <a th:href="@{/users/delete/{id}(id=${user.id})}">Poista</a>
+            </td>
+            
         </tr>
     </table>
-    <a href="/users/new">Lisää uusi käyttäjä</a>
+    <a sec:authorize="hasAuthority('valmentaja')" href="/users/new">Lisää uusi käyttäjä</a>
+    <footer>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </footer>
 </body>
 
 </html>
