@@ -13,19 +13,24 @@
         <a href="/home">Tapahtumat</a>
     </header>
     <h2>Muokkaa haluttuja tietoja</h2>
-    <form th:object="${oldUser}" th:action="@{/users/save}" action="#" method="post">
+    <form th:object="${oldUser}" th:action="@{/users/update}" action="#" method="post">
         <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{username}" />
         <label for="name">Nimi:</label>
         <input type="text" id="name" th:field="*{name}"/>
+        <span th:errors="*{name}"></span>
         <p></p>
         <label for="email">Email:</label>
         <input type="text"id="email" th:field="*{email}"/>
+        <span th:errors="*{email}"></span>
         <p></p>
         <label for="phone">Puhelinnumero:</label>
         <input type="text"id="phone" th:field="*{phone}"/>
+        <span th:errors="*{phone}"></span>
         <p></p>
         <label for="bday">Syntymäaika:</label>
         <input type="date"id="bday" th:field="*{bday}"/>
+        <span th:errors="*{bday}"></span>
         <p></p>
         <label for="role">Rooli</label>
         <select th:field="*{role}">

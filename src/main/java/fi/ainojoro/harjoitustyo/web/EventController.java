@@ -15,6 +15,7 @@ import fi.ainojoro.harjoitustyo.domain.EventRepository;
 import fi.ainojoro.harjoitustyo.domain.ParticipationStatus;
 import fi.ainojoro.harjoitustyo.domain.User;
 import fi.ainojoro.harjoitustyo.domain.UserRepository;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -63,7 +64,7 @@ public class EventController {
 
     @PreAuthorize("hasAuthority('valmentaja')")
     @PostMapping("/save-event")
-    public String saveEvent(@ModelAttribute Event event, BindingResult bindingResult, Model model) {
+    public String saveEvent(@Valid @ModelAttribute Event event, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("event", event);
 

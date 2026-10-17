@@ -1,0 +1,8 @@
+package fi.ainojoro.harjoitustyo.web;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class EventRestController {
+
+}

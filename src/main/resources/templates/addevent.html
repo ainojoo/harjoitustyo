@@ -16,12 +16,14 @@
     <form th:object="${event}" th:action="@{/save-event}" action="#" method="post">
         <label for="title">Nimi:</label>
         <input type="text" id="title" th:field="*{title}"/>
+        <span th:errors="*{title}"></span>
         <p></p>
         <label for="desc">Kuvaus:</label>
         <input type="text"id="desc" th:field="*{desc}"/>
         <p></p>
         <label for="date">Päivämäärä:</label>
         <input type="date"id="date" th:field="*{date}"/>
+        <span th:errors="*{date}"></span>
         <p></p>
         <button type="submit">Lisää tapahtuma</button>
     </form>

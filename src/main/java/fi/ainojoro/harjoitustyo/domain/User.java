@@ -2,7 +2,6 @@ package fi.ainojoro.harjoitustyo.domain;
 
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -32,6 +31,7 @@ public class User {
 
     private String passwordHash;
     
+    @NotBlank(message = "Anna nimi")
     private String name;
 
     @Email(message = "Virheellinen sähköposti osoite")
