@@ -2,6 +2,8 @@ package fi.ainojoro.harjoitustyo.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Role {
     @Size(min = 3, max = 30, message = "Pituus oltava 3-30 merkkiä")
     private String name;
 
+    @JsonIgnore 
     @OneToMany(mappedBy = "role")
     private List<User> users;
 

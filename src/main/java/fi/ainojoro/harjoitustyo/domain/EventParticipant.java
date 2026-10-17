@@ -2,6 +2,8 @@ package fi.ainojoro.harjoitustyo.domain;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,6 +26,7 @@ public class EventParticipant {
 
     @ManyToOne
     @JoinColumn(name = "eventid")
+    @JsonIgnore 
     private Event event;
 
     @Enumerated(EnumType.STRING)

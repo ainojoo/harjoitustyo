@@ -4,6 +4,8 @@ package fi.ainojoro.harjoitustyo.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,7 +51,9 @@ public class User {
     @JoinColumn(name = "roleid")
     private Role role;
     
+    
     @OneToMany(mappedBy = "participant")
+    @JsonIgnore 
     private List<EventParticipant> participations;
 
 
