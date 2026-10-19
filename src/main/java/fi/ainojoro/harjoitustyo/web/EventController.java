@@ -36,7 +36,7 @@ public class EventController {
     }
 
     @GetMapping("/home")
-    public String allEvents(Model model, Authentication authentication) {
+    public String allEvents(Model model) {
         model.addAttribute("events", eventRepository.findAll());
         return "home";
     }
@@ -58,7 +58,7 @@ public class EventController {
     @PreAuthorize("hasAuthority('valmentaja')")
     @GetMapping("/editevent/{id}")
     public String editEvent(@PathVariable("id") Long eventId, Model model) {
-        model.addAttribute("event", eventRepository.findById(eventId));
+        model.addAttribute("event", eventRepository.findById(eventId).orElseThrow());
         return "editevent";
     }
 

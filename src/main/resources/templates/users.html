@@ -20,6 +20,7 @@
             <th>Puhelin</th>
             <th>Syntymäaika</th>
             <th>Rooli</th>
+            <th sec:authorize="hasAuthority('valmentaja')">Käyttäjänimi</th>
             <th sec:authorize="hasAuthority('valmentaja')">Toiminnot</th>
         </tr>
         <tr th:each="user : ${users}">
@@ -28,6 +29,7 @@
             <td th:text="${user.phone}"></td>
             <td th:text="${user.bday}"></td>
             <td th:text="${user.role.name}"></td>
+            <td sec:authorize="hasAuthority('valmentaja')" th:text="${user.username}"></td>
             <td sec:authorize="hasAuthority('valmentaja')">
                 <a th:href="@{/users/edit/{id}(id=${user.id})}">Muokkaa</a>
                 <a th:href="@{/users/delete/{id}(id=${user.id})}">Poista</a>

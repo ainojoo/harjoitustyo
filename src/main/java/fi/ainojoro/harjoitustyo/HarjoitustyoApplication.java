@@ -23,7 +23,7 @@ public class HarjoitustyoApplication {
 		SpringApplication.run(HarjoitustyoApplication.class, args);
 	}
 
-	@Bean
+	/* @Bean
 	CommandLineRunner harkkademo(EventRepository eventRepository, UserRepository userRepository,
 			RoleRepository roleRepository) {
 		return (args) -> {
@@ -42,6 +42,6 @@ public class HarjoitustyoApplication {
 					new User("user", "$2a$10$Ifer7bT/EC3s6DS9nIEl3u4pNs1LK.zP6aNnVdL36wWFc0xI0Z/hq", "User", player));
 
 		};
-	}
+	}*/
 
 }

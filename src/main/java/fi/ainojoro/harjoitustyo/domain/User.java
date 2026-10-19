@@ -4,6 +4,8 @@ package fi.ainojoro.harjoitustyo.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -21,36 +23,40 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "käyttäjät")
+@Table(name = "kayttajat")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "kayttaja_id")
     private Long id;
 
-    @NotBlank(message = "Käyttäjä nimi puuttuu")
-    @Column (unique = true)
+    @NotBlank(message = "Käyttäjän nimi puuttuu")
+    @Column (unique = true, name="kayttajanimi")
     private String username;
 
+    @Column(name="salasana")
     private String passwordHash;
     
     @NotBlank(message = "Anna nimi")
+    @Column(name="nimi")
     private String name;
 
     @Email(message = "Virheellinen sähköposti osoite")
+    @Column(name="email")
     private String email;
 
     @Size(max=20, message = "Puhelinnumero on liian pitkä")
+    @Column(name="puhelin")
     private String phone;
 
     @Past(message = "Syntymäpäivä ei voi olla tulevaisuudessa")
+    @Column (name="syntymapaiva")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate bday;
-    
-
 
     @ManyToOne
-    @JoinColumn(name = "roleid")
+    @JoinColumn(name = "rooli_id")
     private Role role;
-    
     
     @OneToMany(mappedBy = "participant")
     @JsonIgnore 

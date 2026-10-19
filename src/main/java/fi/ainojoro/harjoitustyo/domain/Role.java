@@ -4,22 +4,27 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "roolit")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rooli_id")
     private Long id;
 
     @NotBlank(message = "Rooliilla on oltava nimi")
     @Size(min = 3, max = 30, message = "Pituus oltava 3-30 merkkiä")
+    @Column(name = "nimi")
     private String name;
 
     @JsonIgnore 

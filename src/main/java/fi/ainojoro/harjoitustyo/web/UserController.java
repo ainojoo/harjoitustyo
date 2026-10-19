@@ -54,7 +54,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('valmentaja')")
     @GetMapping("/edit/{id}")
     public String editBook(@PathVariable("id") Long userId, Model model) {
-        model.addAttribute("oldUser", userRepository.findById(userId));
+        model.addAttribute("oldUser", userRepository.findById(userId).orElseThrow());
         model.addAttribute("roles", roleRepository.findAll());
         return "edituser";
     }
@@ -75,8 +75,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('valmentaja')")
     @PostMapping("/update")
     public String updateUser(@Valid @ModelAttribute("oldUser") User oldUser, BindingResult bindingResult, Model model) {
-          System.out.println("UPDATEA KUTSUTTU");
-          System.out.println(bindingResult.getAllErrors());
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("oldUser", oldUser);
             model.addAttribute("roles", roleRepository.findAll());

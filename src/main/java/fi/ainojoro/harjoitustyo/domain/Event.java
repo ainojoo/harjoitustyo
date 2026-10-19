@@ -4,29 +4,41 @@ package fi.ainojoro.harjoitustyo.domain;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
+@Table(name = "tapahtumat")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tapahtuma_id")
     private Long id;
 
     @NotBlank(message = "Tapahtumalla on oltava nimi")
+    @Column (name = "nimi")
     private String title;
 
+    @Size(max = 500)
+    @Column(name = "kuvaus")
     private String desc;
 
     @NotNull(message = "Tapahtumalla on oltava päivämäärä")
     @FutureOrPresent(message = "Päivämäärä ei voi olla menneisyydessä")
+    @Column (name="pvm")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
 
     @OneToMany(mappedBy = "event")

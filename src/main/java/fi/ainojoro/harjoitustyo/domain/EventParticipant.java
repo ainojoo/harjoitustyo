@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,26 +13,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "tapahtuma_osallistujat")
 public class EventParticipant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "kayttaja_id")
     private User participant;
 
     @ManyToOne
-    @JoinColumn(name = "eventid")
+    @JoinColumn(name = "tapahtuma_id")
     @JsonIgnore 
     private Event event;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "ilmoittautuminen")
     private ParticipationStatus status;
 
+    @Column(name = "ilmoittautumisaika")
     private LocalDateTime updatedAt;
     
     public EventParticipant() {
