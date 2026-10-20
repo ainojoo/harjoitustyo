@@ -19,6 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -61,6 +62,10 @@ public class User {
     @OneToMany(mappedBy = "participant")
     @JsonIgnore 
     private List<EventParticipant> participations;
+
+    @NotNull 
+    @Column (name = "paivita_salasana")
+    private boolean mustChangePassword;
 
 
     public User() {
@@ -137,6 +142,14 @@ public class User {
 
     public void setBday(LocalDate bday) {
         this.bday = bday;
+    }
+
+    public boolean isMustChangePassword() {
+        return mustChangePassword;
+    }
+
+    public void setMustChangePassword(boolean mustChangePassword) {
+        this.mustChangePassword = mustChangePassword;
     }
 
     

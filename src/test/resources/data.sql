@@ -9,11 +9,11 @@ VALUES
 ('Kotipeli vs. Turku', 'Pelialkaa klo 12. Ollaan paikalla viimeistään klo 10', '2026-11-28'),
 ('koiranäyttely', 'paljon koiria', '2029-11-19');
 
-INSERT INTO kayttajat (nimi, kayttajanimi, salasana, rooli_id) 
+INSERT INTO kayttajat (nimi, kayttajanimi, salasana, rooli_id, paivita_salasana) 
 VALUES 
-('Maija Meikäläinen', 'maijam', '$2a$10$FQ8ExhLktfLqU4TqSYSH8eU3glBelLQffTIqy2OUOYsnPZrp4gDqG', 1),
-('Pekka Puupää', 'pekkap', '$2a$10$9Txhhz1DRyb0hD7ZY5umFesXzzL3xOnVbQg0fczEy9je/FnT1tBBq', 1),
-('Vilma Valmentaja', 'vilmav', '$2a$10$U5FeSoNMPK6XqMTkdd1V6uRN7imPiYUcZ70n/o3mfafmnERQcSR06', 2);
+('Maija Meikäläinen', 'maijam', '$2a$10$FQ8ExhLktfLqU4TqSYSH8eU3glBelLQffTIqy2OUOYsnPZrp4gDqG', 1, FALSE),
+('Pekka Puupää', 'pekkap', '$2a$10$9Txhhz1DRyb0hD7ZY5umFesXzzL3xOnVbQg0fczEy9je/FnT1tBBq', 1, FALSE),
+('Vilma Valmentaja', 'vilmav', '$2a$10$U5FeSoNMPK6XqMTkdd1V6uRN7imPiYUcZ70n/o3mfafmnERQcSR06', 2, FALSE);
 
 INSERT INTO tapahtuma_osallistujat(kayttaja_id, tapahtuma_id, ilmoittautuminen, ilmoittautumisaika)
 VALUES

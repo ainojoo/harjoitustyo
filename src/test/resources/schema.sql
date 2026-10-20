@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS tapahtuma_osallistujat;
+DROP TABLE IF EXISTS tapahtumat;
+DROP TABLE IF EXISTS kayttajat;
+DROP TABLE IF EXISTS roolit;
+
 -- roolit-taulu
 CREATE TABLE roolit (
     rooli_id BIGSERIAL PRIMARY KEY,
@@ -22,7 +27,8 @@ CREATE TABLE kayttajat (
     rooli_id BIGINT,
     FOREIGN KEY (rooli_id) REFERENCES roolit(rooli_id),
     kayttajanimi VARCHAR(250) UNIQUE NOT NULL,
-    salasana VARCHAR(250) NOT NULL
+    salasana VARCHAR(250) NOT NULL,
+    paivita_salasana BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 --tapahtuma_osallistujat-taulu

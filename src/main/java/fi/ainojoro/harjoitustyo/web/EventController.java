@@ -36,7 +36,13 @@ public class EventController {
     }
 
     @GetMapping("/home")
-    public String allEvents(Model model) {
+    public String allEvents(Model model, Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName());
+
+        if (user.isMustChangePassword()) {
+            return "redirect:/change-password";
+        }
+
         model.addAttribute("events", eventRepository.findAll());
         return "home";
     }

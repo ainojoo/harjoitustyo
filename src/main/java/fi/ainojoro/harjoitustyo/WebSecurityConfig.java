@@ -21,15 +21,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/").permitAll()
                         .anyRequest().authenticated())
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions
-                        .disable()))
-                .httpBasic(Customizer.withDefaults())
+                
                 .formLogin(formlogin -> formlogin
+                        .loginPage("/login")
                         .defaultSuccessUrl("/home", true).permitAll())
                 .logout(logout -> logout
-                        .permitAll())
-                .csrf(csrf -> csrf.disable());
+                        .permitAll());
         return http.build();
 
     }

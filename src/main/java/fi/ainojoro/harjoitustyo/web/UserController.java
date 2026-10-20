@@ -3,6 +3,9 @@ package fi.ainojoro.harjoitustyo.web;
 import fi.ainojoro.harjoitustyo.domain.RoleRepository;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,10 +26,13 @@ public class UserController {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserController(UserRepository userRepository, RoleRepository roleRepository,
+            BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -53,7 +59,7 @@ public class UserController {
     // nyt ei voi muokata omiakaan tietoja, katotaan jos fiksaan tän myöhemmin
     @PreAuthorize("hasAuthority('valmentaja')")
     @GetMapping("/edit/{id}")
-    public String editBook(@PathVariable("id") Long userId, Model model) {
+    public String editUser(@PathVariable("id") Long userId, Model model) {
         model.addAttribute("oldUser", userRepository.findById(userId).orElseThrow());
         model.addAttribute("roles", roleRepository.findAll());
         return "edituser";
@@ -67,7 +73,8 @@ public class UserController {
             model.addAttribute("roles", roleRepository.findAll());
             return "adduser";
         }
-
+        newUser.setPasswordHash(passwordEncoder.encode("vaihda123"));
+        newUser.setMustChangePassword(true);
         userRepository.save(newUser);
         return "redirect:../users";
     }
@@ -85,5 +92,7 @@ public class UserController {
         userRepository.save(oldUser);
         return "redirect:../users";
     }
+
+    
 
 }
