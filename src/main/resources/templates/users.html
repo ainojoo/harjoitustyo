@@ -4,44 +4,53 @@
 <head>
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
 <body>
-    <header>
-        REENILMO
-        <a href="/users">Käyttäjät</a>
-        <a href="/home">Tapahtumat</a>
-    </header>
-    <h1>Moikka <span sec:authentication = "name"></span>!</h1>
-    <table>
-        <tr>
-            <th>Nimi</th>
-            <th>Email</th>
-            <th>Puhelin</th>
-            <th>Syntymäaika</th>
-            <th>Rooli</th>
-            <th sec:authorize="hasAuthority('valmentaja')">Käyttäjänimi</th>
-            <th sec:authorize="hasAuthority('valmentaja')">Toiminnot</th>
-        </tr>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.phone}"></td>
-            <td th:text="${user.bday}"></td>
-            <td th:text="${user.role.name}"></td>
-            <td sec:authorize="hasAuthority('valmentaja')" th:text="${user.username}"></td>
-            <td sec:authorize="hasAuthority('valmentaja')">
-                <a th:href="@{/users/edit/{id}(id=${user.id})}">Muokkaa</a>
-                <a th:href="@{/users/delete/{id}(id=${user.id})}">Poista</a>
-            </td>
-            
-        </tr>
-    </table>
-    <a sec:authorize="hasAuthority('valmentaja')" href="/users/new">Lisää uusi käyttäjä</a>
-    <footer>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">Log out</button>
-        </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">REENILMO</span>
+            <div class="navbar-nav me-auto">
+                <a href="/users" class="nav-link">Käyttäjät</a>
+                <a href="/home" class="nav-link">Tapahtumat</a>
+            </div>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline-danger">Log out</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1>Moikka <span sec:authentication="name"></span>!</h1>
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Nimi</th>
+                <th>Email</th>
+                <th>Puhelin</th>
+                <th>Syntymäaika</th>
+                <th>Rooli</th>
+                <th sec:authorize="hasAuthority('valmentaja')">Käyttäjänimi</th>
+                <th sec:authorize="hasAuthority('valmentaja')">Toiminnot</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.bday}"></td>
+                <td th:text="${user.role.name}"></td>
+                <td sec:authorize="hasAuthority('valmentaja')" th:text="${user.username}"></td>
+                <td sec:authorize="hasAuthority('valmentaja')">
+                    <a th:href="@{/users/edit/{id}(id=${user.id})}">Muokkaa</a>
+                    <a th:href="@{/users/delete/{id}(id=${user.id})}">Poista</a>
+                </td>
+
+            </tr>
+        </table>
+        <a sec:authorize="hasAuthority('valmentaja')" href="/users/new">Lisää uusi käyttäjä</a>
+        
+    </div>
+    <footer class="text-center text-muted mt-5">
+        <p>REENILMO by AINO</p>
     </footer>
 </body>
 

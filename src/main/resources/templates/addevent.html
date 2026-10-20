@@ -4,33 +4,49 @@
 <head>
     <title>Lisää tapahtuma</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
 <body>
-    <header>
-        REENILMO
-        <a href="/users">Käyttäjät</a>
-        <a href="/home">Tapahtumat</a>
-    </header>
-    <h2>Lisää uusi tapahtuma</h2>
-    <form th:object="${event}" th:action="@{/save-event}" action="#" method="post">
-        <label for="title">Nimi:</label>
-        <input type="text" id="title" th:field="*{title}"/>
-        <span th:errors="*{title}"></span>
-        <p></p>
-        <label for="desc">Kuvaus:</label>
-        <input type="text"id="desc" th:field="*{desc}"/>
-        <p></p>
-        <label for="date">Päivämäärä:</label>
-        <input type="date"id="date" th:field="*{date}"/>
-        <span th:errors="*{date}"></span>
-        <p></p>
-        <button type="submit">Lisää tapahtuma</button>
-    </form>
-    <footer>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">Log out</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">REENILMO</span>
+            <div class="navbar-nav me-auto">
+                <a href="/users" class="nav-link">Käyttäjät</a>
+                <a href="/home" class="nav-link">Tapahtumat</a>
+            </div>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline-danger">Log out</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2>Lisää uusi tapahtuma</h2>
+        <form th:object="${event}" th:action="@{/save-event}" action="#" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Nimi:</label>
+                <input type="text" id="title" th:field="*{title}" class="form-control" />
+                <span th:errors="*{title}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">Kuvaus:</label>
+                <input type="text" id="desc" th:field="*{desc}" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Päivämäärä:</label>
+                <input type="date" id="date" th:field="*{date}" class="form-control" />
+                <span th:errors="*{date}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Lisää tapahtuma</button>
+            </div>
         </form>
+
+
+
+    </div>
+    <footer class="text-center text-muted mt-5">
+        <p>REENILMO by AINO</p>
     </footer>
 </body>
 

@@ -4,11 +4,22 @@
 <head>
     <title>REENILMO</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
-<body>
-    <h1>Tervetuloa REENILMOon!!</h1>
-    <a href="/login">Kirjaudu sisään tästä</a>
+<body class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Tervetuloa REENILMO-palveluun</h1>
+            <p class="card-text">
+                Harjoitusten ja osallistujien hallintajärjestelmä.
+            </p>
+            <a href="/login">Kirjaudu sisään tästä</a>
+        </div>
+    </div>
+    <footer class="text-center text-muted mt-5">
+        <p>REENILMO by AINO</p>
+    </footer>
 </body>
 
 </html>

@@ -24,7 +24,6 @@ public class WebSecurityConfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/").permitAll()
                         .anyRequest().authenticated())
-                
                 .formLogin(formlogin -> formlogin
                         .loginPage("/login")
                         .defaultSuccessUrl("/home", true).permitAll())

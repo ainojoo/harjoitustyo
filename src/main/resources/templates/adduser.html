@@ -4,49 +4,64 @@
 <head>
     <title>Lisää käyttäjä</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
 <body>
-    <header>
-        REENILMO
-        <a href="/users">Käyttäjät</a>
-        <a href="/home">Tapahtumat</a>
-    </header>
-
-    <h2>Lisää uuden käyttäjän tiedot</h2>
-    <form th:object="${newUser}" th:action="@{/users/save}" action="#" method="post">
-        <label for="username">Käyttäjäimi:</label>
-        <input type="text" id="username" th:field="*{username}" />
-        <span th:errors="*{username}"></span>
-        <p></p>
-        <label for="name">Nimi:</label>
-        <input type="text" id="name" th:field="*{name}" />
-        <span th:errors="*{name}"></span>
-        <p></p>
-        <label for="email">Email:</label>
-        <input type="text" id="email" th:field="*{email}" />
-        <span th:errors="*{email}"></span>
-        <p></p>
-        <label for="phone">Puhelinnumero:</label>
-        <input type="text" id="phone" th:field="*{phone}" />
-        <span th:errors="*{phone}"></span>
-        <p></p>
-        <label for="bday">Syntymäaika:</label>
-        <input type="date" id="bday" th:field="*{bday}" />
-        <span th:errors="*{bday}"></span>
-        <p></p>
-        <label for="role">Rooli</label>
-        <select th:field="*{role}">
-            <option th:each="role:${roles}" th:value="${role.id}" th:text="${role.name}"></option>
-        </select>
-        <p></p>
-
-        <button type="submit">Lisää käyttäjä</button>
-    </form>
-    <footer>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">Log out</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">REENILMO</span>
+            <div class="navbar-nav me-auto">
+                <a href="/users" class="nav-link">Käyttäjät</a>
+                <a href="/home" class="nav-link">Tapahtumat</a>
+            </div>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="btn btn-outline-danger">Log out</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2>Lisää uuden käyttäjän tiedot</h2>
+        <form th:object="${newUser}" th:action="@{/users/save}" action="#" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Käyttäjäimi:</label>
+                <input type="text" id="username" th:field="*{username}" class="form-control" />
+                <span th:errors="*{username}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nimi:</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control" />
+                <span th:errors="*{name}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" id="email" th:field="*{email}" class="form-control" />
+                <span th:errors="*{email}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Puhelinnumero:</label>
+                <input type="text" id="phone" th:field="*{phone}" class="form-control" />
+                <span th:errors="*{phone}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="bday" class="form-label">Syntymäaika:</label>
+                <input type="date" id="bday" th:field="*{bday}" class="form-control" />
+                <span th:errors="*{bday}" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Rooli:</label>
+                <select th:field="*{role}">
+                    <option th:each="role:${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Lisää käyttäjä</button>
+            </div>
         </form>
+
+    </div>
+    <footer class="text-center text-muted mt-5">
+        <p>REENILMO by AINO</p>
     </footer>
 </body>
 

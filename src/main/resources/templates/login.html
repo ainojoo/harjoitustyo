@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head>
-        <title>REENILMO login </title>
-        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-    </head>
-    <body>
-     <div class="col-md-4 col-md-offset-4">
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <title>REENILMO login </title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">REENILMO</span>
+    </nav>
+    <div class="col-md-4 col-md-offset-4 container mt-4">
         <div class="alert alert-danger" th:if="${param.error}">
             Väärä salasana tai käyttäjätunnus
         </div>
@@ -14,10 +20,14 @@
             Olet kirjautunut ulos :D
         </div>
         <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username" class="form-control"/> </label></div>
-            <div><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
+            <div><label> User Name : <input type="text" name="username" class="form-control" /> </label></div>
+            <div><label> Password: <input type="password" name="password" class="form-control" /> </label></div>
             <div><button type="submit" class="btn btn-primary">Kirjaudu</button></div>
         </form>
-       </div>
-    </body>
+    </div>
+    <footer class="text-center text-muted mt-5">
+        <p>REENILMO by AINO</p>
+    </footer>
+</body>
+
 </html>
